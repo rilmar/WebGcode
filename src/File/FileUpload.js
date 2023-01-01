@@ -5,6 +5,8 @@ function FileUpload(props) {
     const [metadata, setMetadata] = useState()
     const [gcode, setGcode] = useState()
 
+    // add printer temp, etc as well for reporting purposes
+
     const showFile = async (e) => {
         e.preventDefault()
         const reader = new FileReader()
