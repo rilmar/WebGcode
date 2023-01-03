@@ -1,19 +1,20 @@
 import {useState} from 'react'
 
-function FileUpload(props) {
+import {interpretGcodeLine} from './GcodeParser'
+
+const FileUpload = (props) => {
 
     const [metadata, setMetadata] = useState()
-    const [gcode, setGcode] = useState()
+    const [name, setName] = useState()
 
     // add printer temp, etc as well for reporting purposes
 
     const showFile = async (e) => {
         e.preventDefault()
         const reader = new FileReader()
-        reader.onload = async (e) => { 
-          const text = (e.target.result)
-          console.log(text)
-          alert(text)
+        reader.onload = async (f) => { 
+          let rawText = (f.target.result)
+          props.onGcodeLoad(rawText.split(/\r?\n/))
         };
         reader.readAsText(e.target.files[0])
       }
