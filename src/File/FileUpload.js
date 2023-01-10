@@ -19,10 +19,15 @@ const FileUpload = (props) => {
         reader.readAsText(e.target.files[0])
       }
 
+      const handleBedSize = (e) => {
+        console.log(e.target.value)
+      }
+
     return (
         <form>
             <h1>Input Gcode</h1>
             <input type="file" onChange={(e) => showFile(e)}/>
+            {/* <input type="number" onChange={handleBedSize} /> */}
         </form>
     )
 }

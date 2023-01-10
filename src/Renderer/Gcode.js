@@ -2,7 +2,7 @@
 import { useMemo, useRef, useCallback, useEffect, useState } from "react";
 
 import * as THREE from "three"
-import { Canvas } from "@react-three/fiber";
+import { Canvas, group } from "@react-three/fiber";
 import {OrbitControls} from "@react-three/drei";
 
 import {interpretGcodeLine} from "../File/GcodeParser"
@@ -27,9 +27,10 @@ const BedVisual = (props) => {
   const mesh = useRef()
   return ( 
     <mesh
-    {...props}
-    ref = {mesh}>
-      <boxGeometry args={[235,1,235]} />
+    rotation={props.rotation}
+      // {...props}
+      ref = {mesh}>
+      <planeGeometry args={[props.x,props.y]} />
       <meshStandardMaterial color={'lightgrey'} />
     </mesh>
   )
@@ -57,6 +58,7 @@ const GcodeViewer = (props) => {
 
   const getPoints = () => {
     // line from previous to current
+    // will not always contain  value so we need to move according to last coordinate
     const arr = []
     let lastZ = 0.0;
     for (let index = 1; index < movements.length; index++) {
@@ -88,10 +90,18 @@ const GcodeViewer = (props) => {
     <color attach="background" args={['#010101']} />
      <ambientLight intensity={0.75} />
       <OrbitControls></OrbitControls>
+      <mesh>
+        <boxGeometry />
+        <meshStandardMaterial />
+      </mesh>
       {/* <Line start={{"X": 90, "Y": 90, "Z": 0}} end={{"X": -90, "Y": -90, "Z": 0}} /> */}
+      
+      <group position={[-117.5, 0, -117.5]}>
       {movements && getPoints() }
-      {/* <BedVisual /> */}
-      <gridHelper args={[235, 20, 'white', 'teal']} />
+      </group>
+      <BedVisual x={235} y={235} rotation={[-Math.PI/2,0,0]}/>
+
+      {/* <gridHelper args={[235, 20, 'white', 'teal']} /> */}
   </Canvas>)
 }
 

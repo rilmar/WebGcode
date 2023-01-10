@@ -5,11 +5,13 @@
  * @param {*} gcode line of gcode to interpret
  */
 const interpretGcodeLine = (gcode) => {
-    switch (gcode.slice(0,1)) {
-        case "G":
+    switch (gcode.slice(0,2)) {
+        case "G0":
+        case "G1":
             //movement or extrusion command
             let gcodeObject = {}
-            gcode.split(" ").map((g) => {gcodeObject = {...gcodeObject, ...getData(g)}})
+            gcode.split(" ").map((g) => {gcodeObject = {...gcodeObject, ...getMovementData(g)}})
+            console.log(gcodeObject)
             return gcodeObject
             
         // case ";":
@@ -20,13 +22,12 @@ const interpretGcodeLine = (gcode) => {
 
 }
 
-const getData = (text) => {
+const getMovementData = (text) => {
     switch (text.slice(0,1)) {
         case "G":
-            return {"Extrusion": parseInt(text.slice(1))}
+            return {"Movement": "Linear"}
         case "F":
-            //acceleration
-            break;
+            return {"F": parseFloat(text.slice(1))} // acceleration
         case "X":
             return {"X": parseFloat(text.slice(1))}
         case "Y":
@@ -34,8 +35,7 @@ const getData = (text) => {
         case "Z":
             return {"Z": parseFloat(text.slice(1))}
         case "E":
-            // extrusion amount
-            break;
+            return {"E": parseFloat(text.slice(1))}
         default:
             break;
     }
