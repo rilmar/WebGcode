@@ -11,7 +11,6 @@ const interpretGcodeLine = (gcode) => {
             //movement or extrusion command
             let gcodeObject = {}
             gcode.split(" ").map((g) => {gcodeObject = {...gcodeObject, ...getMovementData(g)}})
-            console.log(gcodeObject)
             return gcodeObject
             
         // case ";":
