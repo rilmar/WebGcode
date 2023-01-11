@@ -1,5 +1,5 @@
 
-import { useMemo, useRef, useCallback, useEffect, useState } from "react";
+import { useRef, useCallback, useEffect, useState } from "react";
 
 import * as THREE from "three"
 import { Canvas } from "@react-three/fiber";
@@ -60,7 +60,7 @@ const GcodeViewer = (props) => {
   const [movements, setMovements] = useState([])
   // const lines = useMemo(() => generatePoints(movements), [movements])
 
-  let lines = useRef([])
+  // let lines = useRef([])
 
   useEffect(() => {
     // interpret gcode here
