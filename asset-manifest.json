@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/WebGcode/static/css/main.e06cef50.css",
+    "main.js": "/WebGcode/static/js/main.91a23f93.js",
+    "static/js/787.6a48281f.chunk.js": "/WebGcode/static/js/787.6a48281f.chunk.js",
+    "index.html": "/WebGcode/index.html",
+    "main.e06cef50.css.map": "/WebGcode/static/css/main.e06cef50.css.map",
+    "main.91a23f93.js.map": "/WebGcode/static/js/main.91a23f93.js.map",
+    "787.6a48281f.chunk.js.map": "/WebGcode/static/js/787.6a48281f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e06cef50.css",
+    "static/js/main.91a23f93.js"
+  ]
+}
