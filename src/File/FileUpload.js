@@ -1,11 +1,9 @@
 import {useState} from 'react'
 
-import {interpretGcodeLine} from './GcodeParser'
-
 const FileUpload = (props) => {
 
-    const [metadata, setMetadata] = useState()
-    const [name, setName] = useState()
+    // const [metadata, setMetadata] = useState()
+    // const [name, setName] = useState()
 
     // add printer temp, etc as well for reporting purposes
 
@@ -19,9 +17,9 @@ const FileUpload = (props) => {
         reader.readAsText(e.target.files[0])
       }
 
-      const handleBedSize = (e) => {
-        console.log(e.target.value)
-      }
+      // const handleBedSize = (e) => {
+      //   console.log(e.target.value)
+      // }
 
     return (
         <form>

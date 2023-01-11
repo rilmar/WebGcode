@@ -2,26 +2,26 @@
 import { useMemo, useRef, useCallback, useEffect, useState } from "react";
 
 import * as THREE from "three"
-import { Canvas, group } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import {OrbitControls} from "@react-three/drei";
 
 import {interpretGcodeLine} from "../File/GcodeParser"
 
-const Line = (props)=> {
-  const ref = useRef()
-  const points = useMemo(() => [new THREE.Vector3(props.start.X, props.start.Z, props.start.Y), new THREE.Vector3(props.end.X, props.end.Z, props.end.Y)], [])
-  const onUpdate = useCallback(self => self.setFromPoints(points), [points])
-  // console.log(points)
-  return (
-    <>
-      <line ref={ref}>
-        <bufferGeometry attach="geometry" onUpdate={onUpdate} />
-        <lineBasicMaterial attach="material" color={'red'} linewidth={10} linecap={'round'} linejoin={'round'} />
-      </line>
-    </>
-  )
+// const Line = (props)=> {
+//   const ref = useRef()
+//   const points = useMemo(() => [new THREE.Vector3(props.start.X, props.start.Z, props.start.Y), new THREE.Vector3(props.end.X, props.end.Z, props.end.Y)], [])
+//   const onUpdate = useCallback(self => self.setFromPoints(points), [points])
+//   // console.log(points)
+//   return (
+//     <>
+//       <line ref={ref}>
+//         <bufferGeometry attach="geometry" onUpdate={onUpdate} />
+//         <lineBasicMaterial attach="material" color={'red'} linewidth={10} linecap={'round'} linejoin={'round'} />
+//       </line>
+//     </>
+//   )
 
-}
+// }
 
 const LineAll = (props)=> {
   const ref = useRef()
@@ -76,65 +76,65 @@ const GcodeViewer = (props) => {
     // })
   }, [props.gcode])
 
-  const fillInCoordinateBlanks = (point, previous) => {
+  // const fillInCoordinateBlanks = (point, previous) => {
     
-    return [point, previous]
-  }
+  //   return [point, previous]
+  // }
 
-  const generatePoints = (moves) => {
-    console.log("generating points!")
-    // line from previous to current
-    // will not always contain  value so we need to move according to last coordinate
-    const arr = []
-    let previous={"X":0.0,"Y":0.0,"Z":0.0}
-    // apparently all 3 coordinates can be omitted if the same as the last value
-    for (let index = 1; index < moves.length; index++) {
+  // const generatePoints = (moves) => {
+  //   console.log("generating points!")
+  //   // line from previous to current
+  //   // will not always contain  value so we need to move according to last coordinate
+  //   const arr = []
+  //   let previous={"X":0.0,"Y":0.0,"Z":0.0}
+  //   // apparently all 3 coordinates can be omitted if the same as the last value
+  //   for (let index = 1; index < moves.length; index++) {
 
-      // chunk this out into a method
-      let last = moves[index - 1]
-      if(!last.hasOwnProperty("X")){
-        last.X = previous.X
-      } else {
-        previous.X = last.X
-      }
+  //     // chunk this out into a method
+  //     let last = moves[index - 1]
+  //     if(!last.hasOwnProperty("X")){
+  //       last.X = previous.X
+  //     } else {
+  //       previous.X = last.X
+  //     }
   
-      if(!last.hasOwnProperty("Y")){
-        last.Y = previous.Y
-      } else {
-        previous.Y = last.Y
-      }
+  //     if(!last.hasOwnProperty("Y")){
+  //       last.Y = previous.Y
+  //     } else {
+  //       previous.Y = last.Y
+  //     }
   
-      if(!last.hasOwnProperty("Z")){
-        last.Z = previous.Z
-      } else {
-        previous.Z = last.Z
-      }
+  //     if(!last.hasOwnProperty("Z")){
+  //       last.Z = previous.Z
+  //     } else {
+  //       previous.Z = last.Z
+  //     }
 
-      let current = moves[index]
-      if(!current.hasOwnProperty("X")){
-        current.X = previous.X
-      } else {
-        previous.X = current.X
-      }
+  //     let current = moves[index]
+  //     if(!current.hasOwnProperty("X")){
+  //       current.X = previous.X
+  //     } else {
+  //       previous.X = current.X
+  //     }
   
-      if(!current.hasOwnProperty("Y")){
-        current.Y = previous.Y
-      } else {
-        previous.Y = current.Y
-      }
+  //     if(!current.hasOwnProperty("Y")){
+  //       current.Y = previous.Y
+  //     } else {
+  //       previous.Y = current.Y
+  //     }
   
-      if(!current.hasOwnProperty("Z")){
-        current.Z = previous.Z
-      } else {
-        previous.Z = current.Z
-      }
+  //     if(!current.hasOwnProperty("Z")){
+  //       current.Z = previous.Z
+  //     } else {
+  //       previous.Z = current.Z
+  //     }
 
-      arr.push(<Line key={index} start={last} end={current} />)
-    }
+  //     arr.push(<Line key={index} start={last} end={current} />)
+  //   }
 
-    return arr
+  //   return arr
 
-  }
+  // }
 
   // Try to put all points into same object - look @ performance
   const generatePointsAll = (moves) => {

@@ -10,7 +10,7 @@ const interpretGcodeLine = (gcode) => {
         case "G1":
             //movement or extrusion command
             let gcodeObject = {}
-            gcode.split(" ").map((g) => {gcodeObject = {...gcodeObject, ...getMovementData(g)}})
+            gcode.split(" ").map((g) => gcodeObject = {...gcodeObject, ...getMovementData(g)})
             return gcodeObject
             
         // case ";":
